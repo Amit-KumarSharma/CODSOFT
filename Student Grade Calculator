@@ -1,1 +1,56 @@
+import java.util.Scanner;
 
+public class StudentGradeCalculator {
+    public static void main(String[] args) {
+        // Creating a Scanner object to read user input
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter the number of subjects: ");
+        int numSubjects = input.nextInt();
+
+        int totalMarks = 0;
+        double averagePercentage = 0.0;
+
+        for (int i = 1; i <= numSubjects; i++) {
+            System.out.print("Enter marks obtained in subject " + i + " (out of 100): ");
+            int marks = input.nextInt();
+
+            while (marks < 0 || marks > 100) {
+                System.out.print("Invalid input. Please enter marks between 0 and 100: ");
+                marks = input.nextInt();
+            }
+
+            totalMarks += marks;
+        }
+
+        // Calculating average percentage
+        averagePercentage = (double) totalMarks / numSubjects;
+
+        String grade = getGrade(averagePercentage);
+
+        System.out.println("\nResults:");
+        System.out.println("Total Marks: " + totalMarks);
+        System.out.println("Average Percentage: " + String.format("%.2f", averagePercentage) + "%");
+        System.out.println("Grade: " + grade);
+
+        input.close();
+    }
+
+    public static String getGrade(double averagePercentage) {
+        if (averagePercentage >= 90) {
+            return "A+";
+        } else if (averagePercentage >= 80) {
+            return "A";
+        } else if (averagePercentage >= 70) {
+            return "B+";
+        } else if (averagePercentage >= 60) {
+            return "B";
+        } else if (averagePercentage >= 50) {
+            return "C+";
+        } else if (averagePercentage >= 40) {
+            return "C";
+        } else {
+            return "F";
+        }
+    }
+}
